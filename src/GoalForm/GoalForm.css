@@ -1,0 +1,16 @@
+#goalForm {
+    margin: 0 auto;
+    margin-top: 50px;
+    width: 40%;
+}
+#goal {
+    width: 40%;
+}
+.goalsList {
+    margin-top: 50px;
+}
+
+.goalData {
+    border: solid 1px;
+    margin-top: 20px;
+}
