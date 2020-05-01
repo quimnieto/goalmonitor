@@ -12,7 +12,7 @@ class GoalForm extends Component {
         super(props);
 
         this.addGoal = this.addGoal.bind(this);
-        // this.deleteItem = this.deleteItem.bind(this);
+        this.deleteGoal = this.deleteGoal.bind(this);
     }
 
     state = {
@@ -29,13 +29,18 @@ class GoalForm extends Component {
                 goals: ''
             });
 
-            // storage.setItem('goals',JSON.stringify(this.state.goals));
+            storage.setItem('goals',JSON.stringify(this.state.goals));
         }
         else {
-            console.log("localStorage");
-            this.setState({
-                goals: storage
+            // this.setState({
+            //     goals: storage
+            // });
+            this.setState((prevState) =>{
+                return {
+                    goals: prevState.goals.concat(storage)
+                };
             });
+            console.log(this.state);
         }
     };
 
@@ -62,15 +67,14 @@ class GoalForm extends Component {
 
             this.inputGoal.value = '';
         }
-        console.log(this.state.goals);
+
         e.preventDefault();
     }
 
-    deleteItem(key) {
-        let filteredItems = this.state.goals.filter(function (item) {
-            return (item.key !== key);
+    deleteGoal(key) {
+        let filteredItems = this.state.goals.filter(function (goal) {
+            return (goal.key !== key);
         });
-
         this.setState({
             goals: filteredItems
         });
@@ -93,7 +97,7 @@ class GoalForm extends Component {
                     </Button>
                 </Form>
                 <div className={"goalsList"}>
-                    <Goals listGoals={this.state.goals}/>
+                    <Goals listGoals={this.state.goals} delete={this.deleteGoal}/>
                 </div>
             </div>
         );

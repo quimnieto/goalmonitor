@@ -23,6 +23,7 @@ class Goals extends Component {
            >
                {goal.text}
            </span>
+            <button className={"btn btn-danger delete"} onClick={() => this.delete(goal.key)}>X</button>
         </ListGroup.Item>
     }
 
