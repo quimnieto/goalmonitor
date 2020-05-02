@@ -10,25 +10,29 @@ class GoalData extends Component  {
     }
 
     state = {
-        monday: '',
-        tuesday: '',
-        wednesday: '',
-        thursday: '',
-        friday: '',
-        saturday: '',
-        sunday: ''
+        id: '',
+        days: {
+            monday: '',
+            tuesday: '',
+            wednesday: '',
+            thursday: '',
+            friday: '',
+            saturday: '',
+            sunday: ''
+        },
     }
 
     check(day) {
-        if (this.state[day] === '') {
-            this.setState({
-                [day]: "success"
-            });
+        if (this.props.days[day] === '' || this.props.days[day] == null) {
+            this.props.days[day] = "success";
         } else {
-            this.setState({
-                [day]: ""
-            });
+            this.props.days[day] = "";
         }
+        this.setState({
+            id: this.props.id
+        });
+
+        this.props.updateDays(this.props.id, this.props.title, this.props.days);
     }
 
     render() {
@@ -38,26 +42,26 @@ class GoalData extends Component  {
                     <h3>{this.props.title}</h3>
                 </div>
                 <div className={"days"}>
-                    <ListGroup defaultActiveKey="#link1">
-                        <ListGroup.Item action onClick={() => this.check('monday')} variant={this.state.monday}>
+                    <ListGroup>
+                        <ListGroup.Item action onClick={() => this.check('monday')} variant={this.props.days.monday}>
                             Lunes
                         </ListGroup.Item>
-                        <ListGroup.Item action onClick={() => this.check('tuesday')} variant={this.state.tuesday}>
+                        <ListGroup.Item action onClick={() => this.check('tuesday')} variant={this.props.days.tuesday}>
                             Martes
                         </ListGroup.Item>
-                        <ListGroup.Item action onClick={() => this.check('wednesday')} variant={this.state.wednesday}>
+                        <ListGroup.Item action onClick={() => this.check('wednesday')} variant={this.props.days.wednesday}>
                             Miércoles
                         </ListGroup.Item>
-                        <ListGroup.Item action onClick={() => this.check('thursday')} variant={this.state.thursday}>
+                        <ListGroup.Item action onClick={() => this.check('thursday')} variant={this.props.days.thursday}>
                             Jueves
                         </ListGroup.Item>
-                        <ListGroup.Item action onClick={() => this.check('friday')} variant={this.state.friday}>
+                        <ListGroup.Item action onClick={() => this.check('friday')} variant={this.props.days.friday}>
                             Viernes
                         </ListGroup.Item>
-                        <ListGroup.Item action onClick={() => this.check('saturday')} variant={this.state.saturday}>
+                        <ListGroup.Item action onClick={() => this.check('saturday')} variant={this.props.days.saturday}>
                             Sábado
                         </ListGroup.Item>
-                        <ListGroup.Item action onClick={() => this.check('sunday')} variant={this.state.sunday}>
+                        <ListGroup.Item action onClick={() => this.check('sunday')} variant={this.props.days.sunday}>
                             Domingo
                         </ListGroup.Item>
                     </ListGroup>,

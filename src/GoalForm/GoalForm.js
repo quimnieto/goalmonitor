@@ -6,13 +6,13 @@ import Button from "react-bootstrap/Button";
 import './GoalForm.css';
 import './days';
 
-
 class GoalForm extends Component {
     constructor(props) {
         super(props);
 
         this.addGoal = this.addGoal.bind(this);
         this.deleteGoal = this.deleteGoal.bind(this);
+        this.updateDays = this.updateDays.bind(this);
     }
 
     state = {
@@ -24,23 +24,17 @@ class GoalForm extends Component {
         let storage = JSON.parse(localStorage.getItem('goals'));
 
         if (storage === null) {
-            console.log('entra');
             this.setState({
                 goals: ''
             });
-
-            storage.setItem('goals',JSON.stringify(this.state.goals));
+            localStorage.setItem('goals',JSON.stringify(this.state.goals));
         }
         else {
-            // this.setState({
-            //     goals: storage
-            // });
             this.setState((prevState) =>{
                 return {
                     goals: prevState.goals.concat(storage)
                 };
             });
-            console.log(this.state);
         }
     };
 
@@ -52,11 +46,25 @@ class GoalForm extends Component {
         }
     };
 
+    manualUpdate() {
+        const json = JSON.stringify(this.state.goals);
+        localStorage.setItem("goals", json);
+    }
+
     addGoal(e) {
         if (this.inputGoal.value !== '') {
             let newItem = {
+                key: Date.now(),
                 text: this.inputGoal.value,
-                key: Date.now()
+                days: {
+                    monday: '',
+                    tuesday: '',
+                    wednesday: '',
+                    thursday: '',
+                    friday: '',
+                    saturday: '',
+                    sunday: ''
+                }
             };
 
             this.setState((prevState) =>{
@@ -80,6 +88,25 @@ class GoalForm extends Component {
         });
     }
 
+    updateDays(id, title, days) {
+        let newItem = {
+                key: id,
+                text: title,
+                days: days
+        }
+
+        this.deleteGoal(id);
+
+        this.setState((prevState) =>{
+            return {
+                goals: prevState.goals.concat(newItem)
+            };
+        });
+        this.manualUpdate();
+        console.log(this.state);
+    };
+
+
     render() {
         return (
             <div id={"goalForm"}>
@@ -97,7 +124,7 @@ class GoalForm extends Component {
                     </Button>
                 </Form>
                 <div className={"goalsList"}>
-                    <Goals listGoals={this.state.goals} delete={this.deleteGoal}/>
+                    <Goals listGoals={this.state.goals} delete={this.deleteGoal} updateDays={this.updateDays}/>
                 </div>
             </div>
         );
@@ -105,3 +132,5 @@ class GoalForm extends Component {
 }
 
 export default GoalForm;
+
+

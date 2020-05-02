@@ -37,9 +37,10 @@ class Goals extends Component {
 
     showGoal = (goal) => {
         if (this.state.show) {
+            this.data = '';
             this.data = (
                  <div>
-                    <GoalData key={goal.key} title={goal.text} />
+                    <GoalData id={goal.key} title={goal.text} days={goal.days} updateDays={this.props.updateDays} />
                  </div>
             )
         }
