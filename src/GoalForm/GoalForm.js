@@ -98,10 +98,10 @@ class GoalForm extends Component {
         this.manualUpdate();
     };
 
-
     render() {
         return (
             <div id={"goalForm"}>
+                <h2 className={'title'}>Week Planner</h2>
                 <Form onSubmit={this.addGoal}>
                     <Form.Group controlId="goal">
                         <Form.Label>Objetivo</Form.Label>

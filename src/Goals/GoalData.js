@@ -64,7 +64,7 @@ class GoalData extends Component  {
                         <ListGroup.Item action onClick={() => this.check('sunday')} variant={this.props.days.sunday}>
                             Domingo
                         </ListGroup.Item>
-                    </ListGroup>,
+                    </ListGroup>
                 </div>
             </div>
         )
