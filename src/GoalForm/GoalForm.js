@@ -89,21 +89,13 @@ class GoalForm extends Component {
     }
 
     updateDays(id, title, days) {
-        let newItem = {
-                key: id,
-                text: title,
-                days: days
-        }
-
-        this.deleteGoal(id);
-
-        this.setState((prevState) =>{
-            return {
-                goals: prevState.goals.concat(newItem)
-            };
+        this.state.goals.filter(function (goal) {
+            if (goal.key === id) {
+                goal.days = days;
+            }
         });
+
         this.manualUpdate();
-        console.log(this.state);
     };
 
 
