@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 import GoalData from "./GoalData";
 import './Goals.css';
+import GoalProgressBar from "./GoalProgressBar";
 
 class Goals extends Component {
     constructor(props) {
@@ -40,14 +41,25 @@ class Goals extends Component {
             this.data = '';
             this.data = (
                  <div>
-                    <GoalData id={goal.key} title={goal.text} days={goal.days} updateDays={this.props.updateDays} />
+                    <GoalData
+                        id={goal.key}
+                        title={goal.text}
+                        days={goal.days}
+                        updateDays={this.props.updateDays}
+                        // refreshData = {this.refreshData}
+                    />
                  </div>
             )
         }
     }
 
     delete(key) {
+        this.refreshData();
         this.props.delete(key);
+    }
+
+    refreshData() {
+        this.data = '';
     }
 
     render() {

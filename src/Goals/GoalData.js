@@ -1,25 +1,27 @@
 import React, {Component} from 'react';
 import './Goals.css';
 import ListGroup from "react-bootstrap/ListGroup";
+import GoalProgressBar from "./GoalProgressBar";
 
 class GoalData extends Component  {
+
+    days = [
+        'monday',
+        'tuesday',
+        'wednesday',
+        'thursday',
+        'friday',
+        'saturday',
+        'sunday'
+    ]
+
+    perc = '';
 
     constructor(props) {
         super(props);
         this.check = this.check.bind(this);
-    }
-
-    state = {
-        id: '',
-        days: {
-            monday: '',
-            tuesday: '',
-            wednesday: '',
-            thursday: '',
-            friday: '',
-            saturday: '',
-            sunday: ''
-        },
+        this.getAverage = this.getAverage.bind(this);
+        this.getAverage();
     }
 
     check(day) {
@@ -33,6 +35,18 @@ class GoalData extends Component  {
         });
 
         this.props.updateDays(this.props.id, this.props.title, this.props.days);
+        this.getAverage();
+    }
+
+    getAverage() {
+        let test = this.props.days;
+        let checkedDays = this.days.filter(function (day) {
+            if (test[day] === 'success') {
+                return (day);
+            }
+        });
+        console.log((checkedDays.length * 100 / 7).toFixed(2));
+        this.perc = (checkedDays.length * 100 / 7).toFixed(2);
     }
 
     render() {
@@ -40,6 +54,9 @@ class GoalData extends Component  {
             <div className="goalData">
                 <div className={'header'}>
                     <h3>{this.props.title}</h3>
+                </div>
+                <div className={"bar"} onClick={this.getAverage}>
+                    <GoalProgressBar perc={this.perc}/>
                 </div>
                 <div className={"days"}>
                     <ListGroup>

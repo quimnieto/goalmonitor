@@ -15,6 +15,14 @@ h3 {
     /*height: 20%;*/
     /*margin-left: 10px;*/
 }
+.progress {
+    margin: 15px;
+    width: 90%;
+}
+
+.progress-bar {
+    color: #1e7e34;
+}
 
 @media screen and (max-width : 640px) {
     .delete {
