@@ -94,7 +94,6 @@ class GoalForm extends Component {
                 goal.days = days;
             }
         });
-
         this.manualUpdate();
     };
 

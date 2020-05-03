@@ -56,7 +56,7 @@ class Goals extends Component {
 
         return (
             <div>
-                <ListGroup horizontal>
+                <ListGroup vertical>
                     {listGoals}
                 </ListGroup>
                 {this.data}

@@ -20,3 +20,17 @@
     margin-bottom: 40px;
     text-decoration: underline;
 }
+
+/* Smartphones (portrait) ----------- */
+
+@media screen and (max-width : 640px) {
+    #goal {
+        width: 100%;
+    }
+    #goalForm {
+        width: 90%;
+        border: solid 1px;
+        padding: 25px;
+    }
+
+}
